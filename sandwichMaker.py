@@ -1,12 +1,18 @@
-import pyinputplus
+import pyinputplus as pyip
 
 
-def breadSelector() -> dict: # TODO
+def breadSelector() -> list:
     """
     Gather's user information on their bread selection.  Returns selection to caller along with a price for the bread.
-    :return: dict
+    :return: list
     """
-    pass
+    breadAvailable = {"white": 0.10, "wheat": 0.15, "sourdough": 0.20} # Breadname & price for bread
+    breadNames = []
+    for breadType in breadAvailable:
+        breadNames.append(breadType)
+
+    selectedBread = pyip.inputMenu(breadNames, prompt="Please select bread:\n")
+    return [selectedBread, breadAvailable[selectedBread]]
 
 
 def proteinSelector() -> dict: # TODO
@@ -34,7 +40,10 @@ def toppingSelector() -> dict: # TODO
 
 
 def main():
-    pass
+    sandwichToppings = []
+    sandwichToppings.append(breadSelector())
+
+    print(sandwichToppings)
 
 
 if __name__ == '__main__':
