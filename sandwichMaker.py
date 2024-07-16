@@ -43,12 +43,27 @@ def cheeseSelector() -> list:
     return [selectedCheese, cheeseAvailable[selectedCheese]]
 
 
-def toppingSelector() -> dict: # TODO
+def toppingSelector() -> list:
     """
-    Gather's user information on their toppings selection.  Returns selection to caller along with a price for the items.
-    :return: dict
+    Gather's user information on their selection of sandwich toppings.  Returns selection to caller along with a price for the items.
+    :return: list
     """
-    pass
+    selectedToppings = []
+    mayoSelect = pyip.inputYesNo(prompt="Add Mayo?((Y)es/(N)o)\n")
+    if mayoSelect == 'yes':
+        selectedToppings.append(["mayo", 0.00])
+    mustardSelect = pyip.inputYesNo(prompt="Add Mustard?((Y)es/(N)o)\n")
+    if mustardSelect == 'yes':
+        selectedToppings.append(["mustard", 0.00])
+    lettuceSelect = pyip.inputYesNo(prompt="Add Lettuce?((Y)es/(N)o)\n")
+    if lettuceSelect == 'yes':
+        selectedToppings.append(["lettuce", 0.25])
+    tomatoSelect = pyip.inputYesNo(prompt="Add Tomato?((Y)es/(N)o)\n")
+    if tomatoSelect == 'yes':
+        selectedToppings.append(["mayo", 0.25])
+
+    return selectedToppings
+
 
 
 def main():
@@ -56,6 +71,10 @@ def main():
     cheeseChoice = pyip.inputYesNo(prompt="Would you like cheese?((Y)es/(N)o)\n")
     if cheeseChoice == 'yes':
         sandwichToppings.append(cheeseSelector())
+    condiments = toppingSelector()
+    if len(condiments) > 0:
+        for item in condiments:
+            sandwichToppings.append(item)
     print(sandwichToppings)
 
 
