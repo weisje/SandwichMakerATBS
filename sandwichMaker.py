@@ -65,6 +65,23 @@ def toppingSelector() -> list:
     return selectedToppings
 
 
+def quantityPriceCalculator(toppingsList, quantity) -> float:
+    """
+    Takes the price of each item on the sandwich, sums those, then multiplies the total to find the total cost for all sandwiches
+    :param toppingsList: Toppings that have been selected for the sandwich with their prices
+    :type toppingsList: list
+    :param quantity: Count of sandwiches to be ordered
+    :type quantity: int
+    :return: float
+    """
+    singleSandwichTotal = 0
+    quantityTotal = 0
+    for topping in toppingsList:
+        singleSandwichTotal += topping[1]
+
+    quantityTotal = singleSandwichTotal * quantity
+    return quantityTotal
+
 
 def main():
     sandwichToppings = [breadSelector(), proteinSelector()]
@@ -76,6 +93,9 @@ def main():
         for item in condiments:
             sandwichToppings.append(item)
     print(sandwichToppings)
+    quantity = pyip.inputNum(prompt="How many sandwiches?\n", min=1)
+    totalCost = quantityPriceCalculator(sandwichToppings, quantity)
+    print("Total: $%.2f" % totalCost)
 
 
 if __name__ == '__main__':
