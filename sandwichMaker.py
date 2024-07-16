@@ -29,12 +29,18 @@ def proteinSelector() -> list:
     return [selectedProtein, proteinAvailable[selectedProtein]]
 
 
-def cheeseSelector() -> dict: # TODO
+def cheeseSelector() -> list:
     """
     Gather's user information on their cheese selection.  Returns selection to caller along with a price for the item.
-    :return: dict
+    :return: list
     """
-    pass
+    cheeseAvailable = {"american": 0.25, "cheddar": 0.50, "swiss": 0.75, "mozzarella": 1.00}
+    cheeseNames = []
+    for cheeseType in cheeseAvailable:
+        cheeseNames.append(cheeseType)
+
+    selectedCheese = pyip.inputMenu(cheeseNames, prompt="Please select a cheese:\n")
+    return [selectedCheese, cheeseAvailable[selectedCheese]]
 
 
 def toppingSelector() -> dict: # TODO
@@ -47,7 +53,9 @@ def toppingSelector() -> dict: # TODO
 
 def main():
     sandwichToppings = [breadSelector(), proteinSelector()]
-
+    cheeseChoice = pyip.inputYesNo(prompt="Would you like cheese?((Y)es/(N)o)\n")
+    if cheeseChoice == 'yes':
+        sandwichToppings.append(cheeseSelector())
     print(sandwichToppings)
 
 
